@@ -6,17 +6,22 @@ function connected() {
     email: "+",
   };
   ws.send(JSON.stringify(message));
-  setTimeout(() => {
-    const componsed = {
-      email: "+",
-      address: "/",
-      content: "hello From addition server",
-    };
-    ws.send(JSON.stringify(componsed));
-  }, 6000); // delay of 1000 milliseconds
+}
+function addNumber(number) {
+  console.log("I am performing addition", number);
+  const numbers = JSON.parse(number);
+  const result = Number(numbers.FirstNumber) + Number(numbers.SecondNumber);
+  const componsed = {
+    email: "+",
+    address: "Client",
+    content: result,
+  };
+  ws.send(JSON.stringify(componsed));
+  console.log(componsed);
 }
 ws.addEventListener("message", function (event) {
   console.log("Received message:", event.data);
+  addNumber(event.data);
 });
 function failed() {
   console.log("failed");
