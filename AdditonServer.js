@@ -3,13 +3,13 @@ const ws = new WebSocket("ws://localhost:5001");
 
 function connected() {
   const message = {
-    email: "AdditionServer",
+    email: "+",
   };
   ws.send(JSON.stringify(message));
   setTimeout(() => {
     const componsed = {
-      email: "AdditionServer",
-      address: "DivisionServer",
+      email: "+",
+      address: "/",
       content: "hello From addition server",
     };
     ws.send(JSON.stringify(componsed));
