@@ -30,7 +30,7 @@
         <input type="number" id="inputOne" />
         <h2>Enter another Number:</h2>
         <input type="number" id="inputTwo" />
-        <h2>Enter an addition or division operation:</h2>
+        <h2>Enter a + or / operation:</h2>
         <input type="text" id="operation" oninput="validateInput()" />
         <button
           onclick="validateInput ? send(inputOne.value,inputTwo.value, operation.value) : null"
@@ -38,7 +38,7 @@
           Submit
         </button>
         <br />
-        <p id="message"></p>
+        <h1 id="message"></h1>
         <br />
       </div>
     </div>
@@ -77,16 +77,25 @@
 
       ws.addEventListener("close", failed);
       ws.addEventListener("open", connected);
+      ws.addEventListener("message", function (event) {
+        console.log("Received message:", event.data);
+        document.getElementById(
+          "message"
+        ).innerHTML = `Result From the server: ${event.data}`;
+      });
     }
+
     function validateInput() {
       var x = document.getElementById("operation").value;
-      var regex = /[\+\÷\/]/;
+      var regex = /^[\+\/]$/;
       if (regex.test(x)) {
         document.getElementById("message").innerHTML = "Valid operation!";
+        document.getElementById("message").style.color = "green";
         return true;
       } else {
-        document.getElementById("message").innerHTML =
-          "Invalid operation! Please enter an addition or division operation.";
+        document.getElementById("message").innerHTML = "Invalid! Use + or /";
+        document.getElementById("message").style.color = "red";
+
         return false;
       }
     }

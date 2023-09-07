@@ -19,12 +19,15 @@
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
 }
 h1 {
   color: green;
   display: flex;
   align-self: center;
   justify-content: center;
+  word-wrap: break-word;
 }
 button {
   background-color: #4caf50;
