@@ -14,10 +14,9 @@ app.use(cors());
 console.log("Server is listening on port", port);
 
 wss.on("connection", function connection(ws, req) {
-  console.log("Client connected");
-
   ws.on("message", function incoming(message) {
     const messageData = JSON.parse(message);
+    console.log("message", messageData);
     const email = messageData.email;
     const content = messageData.content;
     const address = messageData.address;
@@ -27,7 +26,7 @@ wss.on("connection", function connection(ws, req) {
       clients.forEach(function (clientWs, clientEmail) {
         console.log("User connected is at floor: ", clientEmail);
         if (clientEmail === String(address)) {
-          clientWs.send(content);
+          clientWs.send(JSON.stringify(content));
           console.log("Client found Message Sent to : ", address);
         } else {
           console.log("no user found", address, clientEmail);
