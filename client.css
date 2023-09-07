@@ -1,0 +1,43 @@
+#header {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+#Setting {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  background-color: lightgray;
+  margin-top: 15%;
+  margin-right: 20%;
+  margin-left: 10%;
+  border-radius: 5%;
+}
+#Setting input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+h1 {
+  color: green;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 20px 46px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin-top: 25px;
+  margin-left: 20px;
+}
