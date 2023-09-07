@@ -24,12 +24,11 @@ wss.on("connection", function connection(ws, req) {
     // Send personalized messages to a specific client
     if (content || address) {
       clients.forEach(function (clientWs, clientEmail) {
-        console.log("User connected is at floor: ", clientEmail);
         if (clientEmail === String(address)) {
           clientWs.send(JSON.stringify(content));
-          console.log("Client found Message Sent to : ", address);
+          console.log("Message Sent to : ", address);
         } else {
-          console.log("no user found", address, clientEmail);
+          console.log("");
         }
       });
     } else {
