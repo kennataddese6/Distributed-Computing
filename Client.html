@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Distributed Computing Client</title>
+    <link rel="stylesheet" href="client.css" />
+  </head>
+  <body>
+    <div id="header">
+      <h1>Distributed Computing Client</h1>
+    </div>
+    <div id="Setting">
+      <div>
+        <br />
+        <br />
+        <h2>Enter An IP Address:</h2>
+        <input type="text" id="ip" />
+        <h2>Enter Port:</h2>
+        <input type="number" id="port" />
+        <button onclick="connect(ip.value, port.value)">Connect</button>
+        <br />
+        <h1 id="connectionReport"></h1>
+        <br />
+      </div>
+    </div>
+    <div id="Setting">
+      <div>
+        <br />
+        <br />
+        <h2>Enter A Number:</h2>
+        <input type="number" id="inputOne" />
+        <h2>Enter another Number:</h2>
+        <input type="number" id="inputTwo" />
+        <h2>Enter an addition or division operation:</h2>
+        <input type="text" id="operation" oninput="validateInput()" />
+        <button
+          onclick="validateInput ? send(inputOne.value,inputTwo.value, operation.value) : null"
+        >
+          Submit
+        </button>
+        <br />
+        <p id="message"></p>
+        <br />
+      </div>
+    </div>
+  </body>
+  <script>
+    let ws;
+    function connect(ip, port) {
+      ws = new WebSocket(`ws://${ip}:${port}`);
+
+      function failed() {
+        console.log("Connection failed");
+        document.getElementById("connectionReport").style.color = "red";
+        document.getElementById("connectionReport").textContent =
+          "Connection Failed";
+      }
+
+      function connected() {
+        console.log("Connection established");
+        const message = {
+          email: "Client",
+        };
+        ws.send(JSON.stringify(message));
+        document.getElementById("connectionReport").textContent =
+          "Connection established";
+        document.getElementById("connectionReport").style.color = "green";
+      }
+      ws.onerror = function (error) {
+        console.log("this is the error", error);
+        document.getElementById("connectionReport").textContent =
+          "Connection Failed";
+      };
+      document.getElementById("connectionReport").style.color = "red";
+      ws.onopen = function () {
+        console.log("Success");
+      };
+
+      ws.addEventListener("close", failed);
+      ws.addEventListener("open", connected);
+    }
+    function validateInput() {
+      var x = document.getElementById("operation").value;
+      var regex = /[\+\÷\/]/;
+      if (regex.test(x)) {
+        document.getElementById("message").innerHTML = "Valid operation!";
+        return true;
+      } else {
+        document.getElementById("message").innerHTML =
+          "Invalid operation! Please enter an addition or division operation.";
+        return false;
+      }
+    }
+    function send(inputOne, inputTwo, operation) {
+      const content = {
+        FirstNumber: inputOne,
+        SecondNumber: inputTwo,
+      };
+      const componsed = {
+        email: "Client",
+        address: operation,
+        content: content,
+      };
+      ws.send(JSON.stringify(componsed));
+    }
+  </script>
+</html>
