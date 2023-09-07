@@ -26,9 +26,9 @@ wss.on("connection", function connection(ws, req) {
     if (content || address) {
       clients.forEach(function (clientWs, clientEmail) {
         console.log("User connected is at floor: ", clientEmail);
-        if (clientEmail === Number(address)) {
-          console.log("message is going to be send to ", address);
+        if (clientEmail === String(address)) {
           clientWs.send(content);
+          console.log("Client found Message Sent to : ", address);
         } else {
           console.log("no user found", address, clientEmail);
         }

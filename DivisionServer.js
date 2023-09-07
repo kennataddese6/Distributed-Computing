@@ -3,14 +3,14 @@ const ws = new WebSocket("ws://localhost:5001");
 
 function connected() {
   const message = {
-    email: "AdditionServer",
+    email: "DivisionServer",
   };
   ws.send(JSON.stringify(message));
   setTimeout(() => {
     const componsed = {
-      email: "AdditionServer",
-      address: "DivisionServer",
-      content: "hello From addition server",
+      email: "DivisionServer",
+      address: "AdditionServer",
+      content: "hello from Division server",
     };
     ws.send(JSON.stringify(componsed));
   }, 6000); // delay of 1000 milliseconds
