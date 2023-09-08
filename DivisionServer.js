@@ -2,7 +2,7 @@ const WebSocket = require("ws");
 const ws = new WebSocket("ws://localhost:5001");
 
 function divideNumber(number) {
-  console.log("I am performing a divison", number);
+  console.log("I am performing The Divison Operation.................");
   const numbers = JSON.parse(number);
   const result = Number(numbers.FirstNumber) / Number(numbers.SecondNumber);
   const componsed = {
@@ -11,7 +11,7 @@ function divideNumber(number) {
     content: result,
   };
   ws.send(JSON.stringify(componsed));
-  console.log(componsed);
+  console.log("Here is the result:", result);
 }
 
 function connected() {
