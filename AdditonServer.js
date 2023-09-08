@@ -1,12 +1,6 @@
 const WebSocket = require("ws");
 const ws = new WebSocket("ws://localhost:5001");
 
-function connected() {
-  const message = {
-    email: "+",
-  };
-  ws.send(JSON.stringify(message));
-}
 function addNumber(number) {
   console.log("I am performing addition", number);
   const numbers = JSON.parse(number);
@@ -19,13 +13,21 @@ function addNumber(number) {
   ws.send(JSON.stringify(componsed));
   console.log(componsed);
 }
-ws.addEventListener("message", function (event) {
-  console.log("Received message:", event.data);
-  addNumber(event.data);
-});
+
+function connected() {
+  const message = {
+    email: "+",
+  };
+  ws.send(JSON.stringify(message));
+}
+
 function failed() {
   console.log("failed");
 }
 
 ws.addEventListener("open", connected);
 ws.addEventListener("close", failed);
+ws.addEventListener("message", function (event) {
+  console.log("Received message:", event.data);
+  addNumber(event.data);
+});
